@@ -1,4 +1,4 @@
-package org.example.Backend;
+package org.example.Kafka;
 
 import java.util.HashMap;
 
