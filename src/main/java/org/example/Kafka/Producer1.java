@@ -14,7 +14,7 @@ public class Producer1{
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        //properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         // Criar o produtor
         Producer<String, String> producer = new KafkaProducer<>(properties);
