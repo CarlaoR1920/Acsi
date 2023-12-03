@@ -30,7 +30,6 @@ public class Producer1 {
                 producer.send(record);
 
                 System.out.println("Mensagem enviada com sucesso: Key = " + key + ", Value = " + dados);
-        // Fechar o produtor ao finalizar
             producer.close();
         }
 }
