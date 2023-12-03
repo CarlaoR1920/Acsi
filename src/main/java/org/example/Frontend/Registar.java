@@ -3,14 +3,14 @@ package org.example.Frontend;
 import org.example.Backend.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class Registar extends JFrame {
+    private JTextField textField3;
     private JPanel registoPanel;
     private JButton cancelarButton;
     private JButton confirmarButton;
+
     private JTextField tfEmail;
     private JTextField tfPass;
     private JTextField tfConfPass;
@@ -23,12 +23,6 @@ public class Registar extends JFrame {
         setSize(500, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        confirmarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registarUser();
-            }
-        });
     }
 
     private void registarUser()
@@ -57,5 +51,4 @@ public class Registar extends JFrame {
             return;
         }
     }
-
 }
