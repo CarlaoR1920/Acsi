@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class Producer1 {
     public Producer1(){}
-    public void prod1() {
+    public void prod1(String dados) {
 
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "localhost:9092");
@@ -21,24 +21,16 @@ public class Producer1 {
 
         String topic = "topico1";
 
-        try {
-            for (int i = 0; i < 10; i++) {
-                String key =  Integer.toString(i);
-                String value =  Integer.toString(i);
+                String key =  Integer.toString(1);
 
                 // Criar um registro de produtor
-                ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, value);
+                ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, dados);
 
                 // Enviar o registro
                 producer.send(record);
 
-                System.out.println("Mensagem enviada com sucesso: Key = " + key + ", Value = " + value);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            // Fechar o produtor ao finalizar
+                System.out.println("Mensagem enviada com sucesso: Key = " + key + ", Value = " + dados);
+        // Fechar o produtor ao finalizar
             producer.close();
         }
-    }
 }

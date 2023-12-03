@@ -8,6 +8,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.json.JSONObject;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -49,21 +50,18 @@ public class MainConsumer {
 
         // Criação do consumidor
         try (Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties)) {
-            // Assinatura do tópico a ser consumido
+
             String topicName = "topico1";
             kafkaConsumer.subscribe(Collections.singletonList(topicName));
 
-            // Loop de leitura de mensagens
+
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
                 records.forEach(record -> {
-                    System.out.println("Recebida mensagem:");
-                    System.out.println("Tópico: " + record.topic());
-                    System.out.println("Partição: " + record.partition());
-                    System.out.println("Offset: " + record.offset());
-                    System.out.println("Chave: " + record.key());
-                    System.out.println("Valor: " + record.value());
-                    System.out.println();
+                    String pedido = record.value();
+                    JSONObject jsonFromString = new JSONObject(pedido);
+                    //jsonFromString.get("tipo");
+
                 });
             }
         } catch (Exception e) {
