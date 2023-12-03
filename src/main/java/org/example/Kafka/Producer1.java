@@ -9,26 +9,22 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.util.Properties;
 
 public class Producer1 {
-
+    public Producer1(){}
     public void prod1() {
 
-        // Configurações do produtor
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "localhost:9092");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
-        // Criar o produtor
         Producer<String, String> producer = new KafkaProducer<>(properties);
 
-        // Tópico para o qual enviar a mensagem
-        String topic = "meu-topico";
+        String topic = "topico1";
 
         try {
-            // Enviar algumas mensagens de exemplo
             for (int i = 0; i < 10; i++) {
-                String key = "chave-" + i;
-                String value = "mensagem-" + i;
+                String key =  Integer.toString(i);
+                String value =  Integer.toString(i);
 
                 // Criar um registro de produtor
                 ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, value);

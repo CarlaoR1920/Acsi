@@ -1,24 +1,21 @@
 package org.example.Frontend;
 
-import Backend.*;
+import org.example.Backend.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Registar extends JFrame {
-    private JTextField fdNome;
-    private JTextField fdUser;
-    private JTextField textField3;
-    private JTextField textField4;
     private JPanel registoPanel;
     private JButton cancelarButton;
     private JButton confirmarButton;
-    private JTextField textField1;
-    private JLabel tfEmail;
-    private JLabel tfPass;
-    private JLabel tfConfPass;
-    private JLabel tfUser;
-    private JLabel tfNome;
+    private JTextField tfEmail;
+    private JTextField tfPass;
+    private JTextField tfConfPass;
+    private JTextField tfUser;
+    private JTextField tfNome;
 
     public Registar() {
         setContentPane(registoPanel);
@@ -26,6 +23,12 @@ public class Registar extends JFrame {
         setSize(500, 450);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registarUser();
+            }
+        });
     }
 
     private void registarUser()
@@ -54,4 +57,5 @@ public class Registar extends JFrame {
             return;
         }
     }
+
 }
