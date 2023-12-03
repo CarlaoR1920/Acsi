@@ -19,7 +19,7 @@ public class Main {
         utilizador.put("nome", "Nome Sobrenome");
 
         JSONObject json = new JSONObject();
-        json.put("tipo", "exemploTipo");
+        json.put("tipo", "Insert");
         json.put("utilizador", utilizador);
 
         String jsonString = json.toString();
