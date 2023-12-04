@@ -101,16 +101,6 @@
                   <text value="Password:"/>
                 </properties>
               </component>
-              <component id="4c057" class="javax.swing.JTextField" binding="tfPass">
-                <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="150" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <background color="-1"/>
-                </properties>
-              </component>
               <component id="d967e" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -142,7 +132,7 @@
                   <text value="Confirmar Password:"/>
                 </properties>
               </component>
-              <component id="be3ab" class="javax.swing.JTextField" binding="tfConfPass">
+              <component id="40377" class="javax.swing.JPasswordField" binding="pfConfPass">
                 <constraints>
                   <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -150,7 +140,17 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
-                  <foreground color="-1"/>
+                  <foreground color="-2104859"/>
+                </properties>
+              </component>
+              <component id="a0eed" class="javax.swing.JPasswordField" binding="pfPass">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
                 </properties>
               </component>
             </children>

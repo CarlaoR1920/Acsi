@@ -75,7 +75,7 @@ public class MainConsumer {
                     String email = utilizador.getString("email");
                     String password = utilizador.getString("password");
                     String nome = utilizador.getString("nome");
-                    String tipo = "Passageiro";
+                    String tipo = utilizador.getString("tipo");
 
                     try {
                         // Carregar o driver JDBC
