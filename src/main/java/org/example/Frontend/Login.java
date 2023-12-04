@@ -43,7 +43,7 @@ public class Login extends JFrame{
     }
 
 
-    public static void verificarUsuario( String username, String password) {
+    public void verificarUsuario( String username, String password) {
         try {
             String url = "jdbc:mysql://192.168.56.10:3306/TubMobile";
             String usuario = "user";
@@ -66,10 +66,13 @@ public class Login extends JFrame{
                     try (ResultSet resultSet = statement.executeQuery()) {
                         if (resultSet.next()) {
                             // Usuário encontrado, login bem-sucedido
-                            JOptionPane.showConfirmDialog(this,
+                            JOptionPane.showConfirmDialog(loginPanel,
                                     "Bem-vindo!",
                                     "Login realizado com sucesso!",
                                     JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            EscolherRotas rotas = new EscolherRotas();
+
                         } else {
                             // Nenhum usuário correspondente encontrado
                             System.out.println("Usuário não encontrado ou senha incorreta.");
