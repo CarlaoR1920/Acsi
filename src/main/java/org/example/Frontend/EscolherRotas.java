@@ -4,7 +4,7 @@ import javax.swing.*;import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class EscolherRotas extends JFrame{
+public class EscolherRotas extends JFrame {
     private JComboBox cbTipo;
     private JComboBox cbOrigem;
     private JButton cancelarButton;
@@ -13,9 +13,9 @@ public class EscolherRotas extends JFrame{
     private JComboBox cbDestino;
 
     public EscolherRotas() {
-        String s1[] = { "Bilhete simples", "Pack 5 Bilhetes", "Passe Mensal"};
+        String s1[] = {"Bilhete simples", "Pack 5 Bilhetes", "Passe Mensal"};
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(s1));
-        String s2[] = { "Braga", "Guimarâes", "Barcelos", "Famalicão"};
+        String s2[] = {"Braga", "Guimarâes", "Barcelos", "Famalicão"};
         cbOrigem.setModel(new javax.swing.DefaultComboBoxModel(s2));
         cbDestino.setModel(new javax.swing.DefaultComboBoxModel(s2));
         setContentPane(escolherRotas);
@@ -33,7 +33,7 @@ public class EscolherRotas extends JFrame{
                 String destino = cbTipo.getSelectedItem().toString();
                 String tipo = cbTipo.getSelectedItem().toString();
                 dispose();
-                TipoDePagamento tipoPag = new TipoDePagamento(origem,destino,tipo);
+                TipoDePagamento tipoPag = new TipoDePagamento(origem, destino, tipo);
             }
         });
         cancelarButton.addActionListener(new ActionListener() {
@@ -43,4 +43,5 @@ public class EscolherRotas extends JFrame{
             }
         });
     }
-}//ole
+}
+
