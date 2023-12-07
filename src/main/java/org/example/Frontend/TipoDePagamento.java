@@ -7,7 +7,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class TipoDePagamento extends JFrame{
+public class TipoDePagamento extends JFrame {
     private String origem;
     private String destino;
     private String tipo;
@@ -17,10 +17,46 @@ public class TipoDePagamento extends JFrame{
     private JButton cancelarButton;
     private JPanel panelTipoDePagamento;
 
-    public TipoDePagamento(String origem, String destino, String tipo){
-        this.origem=origem;
-        this.destino=destino;
-        this.tipo=tipo;
+    public static String obterHoraAtualMaisUmDia() {
+        LocalDateTime horaAtual = LocalDateTime.now();
+        LocalDateTime horaMaisUmDia = horaAtual.plusDays(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        return horaMaisUmDia.format(formatter);
+    }
+
+    public static String obterDataAtualMaisUmDia() {
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataMaisUmDia = dataAtual.plusDays(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        return dataMaisUmDia.format(formatter);
+    }
+
+    public static String gerarReferenciaBancaria() {
+        // Tamanho da referência bancária desejada
+        int tamanhoReferencia = 10;
+
+        // Geração de números aleatórios
+        Random random = new Random();
+
+        StringBuilder referencia = new StringBuilder();
+
+        for (int i = 0; i < tamanhoReferencia; i++) {
+            int digito = random.nextInt(10); // Gera um número aleatório entre 0 e 9
+            referencia.append(digito);
+        }
+
+        return referencia.toString();
+    }
+
+    public TipoDePagamento(String origem, String destino, String tipo) {
+
+        this.origem = origem;
+        this.destino = destino;
+        this.tipo = tipo;
         setContentPane(panelTipoDePagamento);
         setTitle("TubMobile");
         setSize(650, 300);
