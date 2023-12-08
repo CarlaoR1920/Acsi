@@ -97,7 +97,9 @@ public class MainConsumer {
                                 statement.setString(2, email);
                                 statement.setString(3, password);
                                 statement.setString(4, nome);
-                                statement.setString(5, tipo);
+                                statement.setString(5, nif);
+                                statement.setString(6, tipo);
+
 
                                 // Executar a consulta
                                 int linhasAfetadas = statement.executeUpdate();

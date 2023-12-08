@@ -90,6 +90,7 @@ public class TipoDePagamento extends JFrame {
                     String getMessage2 = JOptionPane.showInputDialog(jFrame, "Insira a sua palavra passe:");
                 }
             }
+
         });
     }
 
