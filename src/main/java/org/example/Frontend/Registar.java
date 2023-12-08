@@ -56,8 +56,8 @@ public class Registar extends JFrame {
         String pass = new String(passChars);
         char[] confPassChars = pfConfPass.getPassword();
         String confPass = new String(confPassChars);
-        System.out.println(pass);
-        if (username.isEmpty() || nome.isEmpty() || email.isEmpty() || pass.isEmpty() || confPass.isEmpty()) {
+        String nif = tfNIF.getText();
+        if (username.isEmpty() || nome.isEmpty() || email.isEmpty() || pass.isEmpty() || confPass.isEmpty() || nif.isEmpty()) {
             JOptionPane.showConfirmDialog(this,
                     "Preencha todos os campos por favor!",
                     "Tenta novamente!",
@@ -78,6 +78,7 @@ public class Registar extends JFrame {
         utilizador.put("username", username);
         utilizador.put("email", email);
         utilizador.put("password", pass);
+        utilizador.put("nif", nif);
         utilizador.put("tipo", "Passageiro");
 
         JSONObject json = new JSONObject();

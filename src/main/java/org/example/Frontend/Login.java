@@ -8,6 +8,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import org.apache.kafka.clients.producer.Producer;
+import org.example.Backend.*;
+import org.example.Kafka.ConsumerResultadoLogin;
+import org.example.Kafka.ProducerLogin;
+import org.json.JSONObject;
+
 public class Login extends JFrame {
     private JPasswordField tfPass;
     private JTextField tfUser;

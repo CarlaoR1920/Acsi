@@ -24,30 +24,6 @@ import java.util.concurrent.ExecutionException;
 public class MainConsumer {
     public static void main(String[] args) {
 
-       /* // Configurações do administrador do Kafka
-        Properties adminProperties = new Properties();
-        adminProperties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-
-        try (AdminClient adminClient = AdminClient.create(adminProperties)) {
-            String topicName = "topico1";
-
-            // Número de partições e fator de replicação para o novo tópico
-            int numPartitions = 1;
-            short replicationFactor = 1;
-
-            // Criação do objeto NewTopic
-            NewTopic newTopic = new NewTopic(topicName, numPartitions, replicationFactor);
-
-            // Criação do tópico
-            adminClient.createTopics(Collections.singletonList(newTopic))
-                    .all()
-                    .get(); // Espera a operação ser concluída
-
-            System.out.println("Tópico criado com sucesso: " + topicName);
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Erro ao criar o tópico: " + e.getMessage());
-        }*/
-
         Properties consumerProperties = new Properties();
         consumerProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         consumerProperties.put(ConsumerConfig.GROUP_ID_CONFIG, "meu-grupo");
@@ -80,6 +56,7 @@ public class MainConsumer {
                     String email = utilizador.getString("email");
                     String password = utilizador.getString("password");
                     String nome = utilizador.getString("nome");
+                    String nif = utilizador.getString("nif");
                     String tipo = utilizador.getString("tipo");
 
                     try {
@@ -89,7 +66,7 @@ public class MainConsumer {
                         // Estabelecer a conexão com o banco de dados
                         try (Connection connection = DriverManager.getConnection(url, usuario, senha)) {
                             // Consulta SQL para o INSERT
-                            String sql = "INSERT INTO Utilizadores (username, email, password, nome, tipo) VALUES (?, ?, ?, ?,?)";
+                            String sql = "INSERT INTO Utilizadores (username, email, password, nome,nif, tipo) VALUES (?, ?, ?, ?,?,?)";
 
                             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                                 // Atribuir valores aos parâmetros da consulta

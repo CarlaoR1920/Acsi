@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 
 public class EscolherRotas extends JFrame {
+    private String username;
     private JComboBox cbTipo;
     private JComboBox cbOrigem;
     private JButton cancelarButton;
@@ -12,7 +13,8 @@ public class EscolherRotas extends JFrame {
     private JPanel escolherRotas;
     private JComboBox cbDestino;
 
-    public EscolherRotas() {
+    public EscolherRotas(String username) {
+        this.username = username;
         String s1[] = {"Bilhete simples", "Pack 5 Bilhetes", "Passe Mensal"};
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel(s1));
         String s2[] = {"Braga", "Guimarâes", "Barcelos", "Famalicão"};
@@ -33,7 +35,7 @@ public class EscolherRotas extends JFrame {
                 String destino = cbTipo.getSelectedItem().toString();
                 String tipo = cbTipo.getSelectedItem().toString();
                 dispose();
-                TipoDePagamento tipoPag = new TipoDePagamento(origem, destino, tipo);
+                TipoDePagamento tipoPag = new TipoDePagamento(origem, destino, tipo, username);
             }
         });
         cancelarButton.addActionListener(new ActionListener() {
