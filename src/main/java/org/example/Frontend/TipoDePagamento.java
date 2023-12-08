@@ -97,16 +97,24 @@ public class TipoDePagamento extends JFrame {
                 pay.put("meio_pagamento", pagamento);
                 pay.put("username", username);
                 JFrame jFrame = new JFrame();
+                ConsumerResultadoTokens crt = new ConsumerResultadoTokens();
+                int tokens;
 
                 if(pagamento.equals("MBWay")) {
                     String getMessage = JOptionPane.showInputDialog(jFrame, "Insira o seu número de telemóvel:");
-                    prodValCompra.prod("5.49");
                     hora_atual = obterhora();
                     data = CurrentDateExample();
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
                     jsonString = pay.toString();
+                    prodValCompra.prod(valor);
+                    tokens = crt.coonsumerResultadoTokens();
                     prodPagamento.producerPagamento(jsonString);
+                    JOptionPane.showMessageDialog(panelTipoDePagamento,
+                            "Você Recebeu:"+ tokens + " tokens",
+                            "Compra Bem-sucedida! ",
+                            JOptionPane.INFORMATION_MESSAGE);
+
                 } else if(pagamento.equals("Multibanco")){
                     JOptionPane.showMessageDialog(jFrame, "Entidade: 51033\nReferência: " + gerarReferenciaBancaria() + "\nValor: " + lbValor.getText()
                             + "\nPrazo de pagamento: " + obterDataAtualMaisUmDia() + " até às " + obterHoraAtualMaisUmDia());
@@ -116,8 +124,14 @@ public class TipoDePagamento extends JFrame {
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
                     jsonString = pay.toString();
-                    prodValCompra.prod("5.49");
+                    prodValCompra.prod(valor);
+                    tokens = crt.coonsumerResultadoTokens();
                     prodPagamento.producerPagamento(jsonString);
+                    JOptionPane.showMessageDialog(panelTipoDePagamento,
+                            "Você Recebeu:"+ tokens + " tokens",
+                            "Compra Bem-sucedida! ",
+                            JOptionPane.INFORMATION_MESSAGE);
+
                 }else{
                     String getMessage = JOptionPane.showInputDialog(jFrame, "Insira o seu email:");
                     String getMessage2 = JOptionPane.showInputDialog(jFrame, "Insira a sua palavra passe:");
@@ -127,8 +141,13 @@ public class TipoDePagamento extends JFrame {
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
                     jsonString = pay.toString();
-                    prodValCompra.prod("5.49");
+                    prodValCompra.prod(valor);
+                    tokens = crt.coonsumerResultadoTokens();
                     prodPagamento.producerPagamento(jsonString);
+                    JOptionPane.showMessageDialog(panelTipoDePagamento,
+                            "Você Recebeu:"+ tokens + " tokens",
+                            "Compra Bem-sucedida! ",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 

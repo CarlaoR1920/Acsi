@@ -53,14 +53,16 @@ public class TarefaAPI {
         String topic = "topicoTokens";
 
         String key =  Integer.toString(1);
-        System.out.print(dados);
+        String minha_string_sem_igual = dados.replace("=", "");
+        float flaot = Float.parseFloat(minha_string_sem_igual);
+        int i = (int) flaot;
+        String dado = String.valueOf(i);
         // Criar um registro de produtor
-        ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, dados);
-
+        ProducerRecord<String, String> record = new ProducerRecord<>(topic, key, dado);
         // Enviar o registro
         producer.send(record);
 
-        System.out.println("Mensagem enviada com sucesso: Key = " + key + ", Value = " + dados);
+        System.out.println("Mensagem enviada com sucesso: Key = " + key + ", Value = " + dado);
         // Fechar o produtor ao finalizar
         producer.close();
     }
