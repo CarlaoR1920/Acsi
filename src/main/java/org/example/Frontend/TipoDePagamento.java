@@ -63,7 +63,7 @@ public class TipoDePagamento extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        lbValor.setText("50.49€");
+        lbValor.setText("50.49");
         String s1[] = {"Multibanco", "MBWay", "PayPal"};
         cbMeioPagamento.setModel(new javax.swing.DefaultComboBoxModel(s1));
 
@@ -75,7 +75,13 @@ public class TipoDePagamento extends JFrame {
                 JFrame jFrame = new JFrame();
                 if(pagamento.equals("MBWay")) {
                     String getMessage = JOptionPane.showInputDialog(jFrame, "Insira o seu número de telemóvel:");
-                    JOptionPane.showMessageDialog(jFrame, "Your message: " + getMessage);
+                    prodValCompra.prod("5.49");
+                    hora_atual = obterhora();
+                    data = CurrentDateExample();
+                    pay.put("hora_compra", hora_atual);
+                    pay.put("data", data);
+                    jsonString = pay.toString();
+                    prodPagamento.producerPagamento(jsonString);
                 } else if(pagamento.equals("Multibanco")){
                     JOptionPane.showMessageDialog(jFrame, "Entidade: 51033\nReferência: " + gerarReferenciaBancaria() + "\nValor: " + lbValor.getText()
                             + "\nPrazo de pagamento: " + obterDataAtualMaisUmDia() + " até às " + obterHoraAtualMaisUmDia());

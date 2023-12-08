@@ -1,6 +1,5 @@
 package org.example.Frontend;
 
-import org.example.Backend.*;
 import org.example.Kafka.*;
 import org.json.JSONObject;
 
@@ -20,11 +19,12 @@ public class Registar extends JFrame {
     private JTextField tfNome;
     private JPasswordField pfConfPass;
     private JPasswordField pfPass;
+    private JTextField tfNIF;
 
     public Registar() {
         setContentPane(registoPanel);
         setTitle("Regista-te");
-        setSize(500, 450);
+        setSize(550, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         confirmarButton.addActionListener(new ActionListener() {
@@ -49,7 +49,6 @@ public class Registar extends JFrame {
     }
 
     private void registarUser() {
-        Utilizador user = new Utilizador();
         String username = tfUser.getText();
         String nome = tfNome.getText();
         String email = tfEmail.getText();

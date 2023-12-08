@@ -9,44 +9,20 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.example.Backend.Utilizador;
+import org.example.Frontend.EscolherRotas;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.sql.*;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-public class MainConsumer {
+public class ConsumerLogin {
     public static void main(String[] args) {
-
-       /* // Configurações do administrador do Kafka
-        Properties adminProperties = new Properties();
-        adminProperties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-
-        try (AdminClient adminClient = AdminClient.create(adminProperties)) {
-            String topicName = "topico1";
-
-            // Número de partições e fator de replicação para o novo tópico
-            int numPartitions = 1;
-            short replicationFactor = 1;
-
-            // Criação do objeto NewTopic
-            NewTopic newTopic = new NewTopic(topicName, numPartitions, replicationFactor);
-
-            // Criação do tópico
-            adminClient.createTopics(Collections.singletonList(newTopic))
-                    .all()
-                    .get(); // Espera a operação ser concluída
-
-            System.out.println("Tópico criado com sucesso: " + topicName);
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Erro ao criar o tópico: " + e.getMessage());
-        }*/
 
         Properties consumerProperties = new Properties();
         consumerProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -59,7 +35,7 @@ public class MainConsumer {
         // Criação do consumidor
         try (Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties)) {
 
-            String topicName = "topico1";
+            String topicName = "topicoDadosLogin";
             kafkaConsumer.subscribe(Collections.singletonList(topicName));
 
 
@@ -67,8 +43,8 @@ public class MainConsumer {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
                 records.forEach(record -> {
                     String pedido = record.value();
-                    JSONObject jsonFromString = new JSONObject(pedido);
-                    JSONObject utilizador = jsonFromString.getJSONObject("utilizador");
+                    JSONObject pagamento = new JSONObject(pedido);
+
 
                     //String url = "jdbc:mysql://192.168.56.10:3306/TubMobile";
                     String url = "jdbc:mysql://192.168.217.132:3306/TubMobile";
@@ -76,11 +52,8 @@ public class MainConsumer {
                     String senha = "pass";
 
                     // Dados para inserção
-                    String username = utilizador.getString("username");
-                    String email = utilizador.getString("email");
-                    String password = utilizador.getString("password");
-                    String nome = utilizador.getString("nome");
-                    String tipo = utilizador.getString("tipo");
+                    String nome = pagamento.getString("nome");
+                    String pass = pagamento.getString("password");
 
                     try {
                         // Carregar o driver JDBC
@@ -88,24 +61,24 @@ public class MainConsumer {
 
                         // Estabelecer a conexão com o banco de dados
                         try (Connection connection = DriverManager.getConnection(url, usuario, senha)) {
-                            // Consulta SQL para o INSERT
-                            String sql = "INSERT INTO Utilizadores (username, email, password, nome, tipo) VALUES (?, ?, ?, ?,?)";
+                            // Consulta SQL para verificar o usuário com o nome de usuário e senha fornecidos
+                            String sql = "SELECT * FROM Utilizadores WHERE username = ? AND password = ?";
 
                             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                                 // Atribuir valores aos parâmetros da consulta
-                                statement.setString(1, username);
-                                statement.setString(2, email);
-                                statement.setString(3, password);
-                                statement.setString(4, nome);
-                                statement.setString(5, tipo);
+                                statement.setString(1, String.valueOf(nome));
+                                statement.setString(2, String.valueOf(pass));
 
                                 // Executar a consulta
-                                int linhasAfetadas = statement.executeUpdate();
+                                try (ResultSet resultSet = statement.executeQuery()) {
+                                    if (resultSet.next()) {
+                                        ProducerResultadoLogin prl = new ProducerResultadoLogin();
+                                        prl.producerResultadoLogin("1");
 
-                                if (linhasAfetadas > 0) {
-                                    System.out.println("Inserção bem-sucedida!");
-                                } else {
-                                    System.out.println("Falha na inserção.");
+                                    } else {
+                                        // Nenhum usuário correspondente encontrado
+                                        System.out.println("Usuário não encontrado ou senha incorreta.");
+                                    }
                                 }
                             }
                         }
@@ -119,3 +92,4 @@ public class MainConsumer {
         }
     }
 }
+

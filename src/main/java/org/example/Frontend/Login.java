@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login extends JFrame{
-    private JTextField tfPass;
+public class Login extends JFrame {
+    private JPasswordField tfPass;
     private JTextField tfUser;
     private JPanel loginPanel;
     private JButton registerBtn;
@@ -17,13 +17,13 @@ public class Login extends JFrame{
     private JButton registarBtn;
 
     public Login() {
-    setContentPane(loginPanel);
-    setTitle("TubMobile");
-    setSize(500,450);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
-    setLocationRelativeTo(null);
+        setContentPane(loginPanel);
+        setTitle("TubMobile");
+        setSize(500, 450);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-    setVisible(true);
+        setVisible(true);
         registarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -36,53 +36,31 @@ public class Login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String user = tfUser.getText();
-                String pass= tfPass.getText();
-                verificarUsuario(user,pass);
+                String pass = tfPass.getText();
+                JSONObject json = new JSONObject();
+                json.put("nome", user);
+                json.put("password", pass);
+                String jsonString = json.toString();
+                ProducerLogin pl = new ProducerLogin();
+                pl.producerLogin(jsonString);
+                ConsumerResultadoLogin crl = new ConsumerResultadoLogin();
+                if (crl.coonsumerResultadoLogin()) {
+                    JOptionPane.showMessageDialog(loginPanel,
+                            "Login efetuado com sucesso!",
+                            "Bem-Vindo",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    EscolherRotas rotas = new EscolherRotas(user);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(loginPanel,
+                            "Login efetuado com sucesso!",
+                            "Bem-Vindo",
+                            JOptionPane.ERROR_MESSAGE);
+                    dispose();
+                }
             }
         });
     }
-
-
-    public void verificarUsuario( String username, String password) {
-        try {
-            String url = "jdbc:mysql://192.168.56.10:3306/TubMobile";
-            String usuario = "user";
-            String senha = "pass";
-
-            // Carregar o driver JDBC
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Estabelecer a conexão com o banco de dados
-            try (Connection connection = DriverManager.getConnection(url, usuario, senha)) {
-                // Consulta SQL para verificar o usuário com o nome de usuário e senha fornecidos
-                String sql = "SELECT * FROM Utilizadores WHERE username = ? AND password = ?";
-
-                try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    // Atribuir valores aos parâmetros da consulta
-                    statement.setString(1, username);
-                    statement.setString(2, password);
-
-                    // Executar a consulta
-                    try (ResultSet resultSet = statement.executeQuery()) {
-                        if (resultSet.next()) {
-                            // Usuário encontrado, login bem-sucedido
-                            JOptionPane.showConfirmDialog(loginPanel,
-                                    "Bem-vindo!",
-                                    "Login realizado com sucesso!",
-                                    JOptionPane.ERROR_MESSAGE);
-                            dispose();
-                            EscolherRotas rotas = new EscolherRotas();
-
-                        } else {
-                            // Nenhum usuário correspondente encontrado
-                            System.out.println("Usuário não encontrado ou senha incorreta.");
-                        }
-                    }
-                }
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
+
+
