@@ -82,6 +82,7 @@ public class ConsumerPagamento {
                                     System.out.println("Falha na inserção.");
                                 }
                             }
+
                             String sql2 = "SELECT * FROM Utilizadores WHERE username = ?";
                             try (PreparedStatement statement2 = connection.prepareStatement(sql2)) {
                                 statement2.setString(1, username);

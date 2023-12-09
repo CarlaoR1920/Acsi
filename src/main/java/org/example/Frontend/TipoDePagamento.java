@@ -98,6 +98,9 @@ public class TipoDePagamento extends JFrame {
                 pay.put("estado", "1");
                 pay.put("meio_pagamento", pagamento);
                 pay.put("username", username);
+                pay.put("origem", origem);
+                pay.put("destino", destino);
+                pay.put("tipo", tipo);
                 JFrame jFrame = new JFrame();
                 ConsumerResultadoTokens crt = new ConsumerResultadoTokens();
                 int tokens;
