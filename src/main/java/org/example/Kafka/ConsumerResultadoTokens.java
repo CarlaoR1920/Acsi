@@ -25,17 +25,17 @@ public class ConsumerResultadoTokens {
 
             // Criação do consumidor
             try (Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(consumerProperties)) {
-                System.out.println("ola");
+
                 String topicName = "topicoTokens";
                 kafkaConsumer.subscribe(Collections.singletonList(topicName));
 
 
                 while (true) {
-                    System.out.println("ol2");
+
                     ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
                     for (ConsumerRecord<String, String> record : records) {
                         String tokens = record.value();
-                        System.out.println("ola3");
+
                         return Integer.parseInt(tokens);
                     }
                 }

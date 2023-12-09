@@ -88,10 +88,10 @@ public class Registar extends JFrame {
         String jsonString = json.toString();
 
         prod1.prod1(jsonString);
-        JOptionPane.showConfirmDialog(this,
+        JOptionPane.showMessageDialog(this,
                 "Registo efetuado com sucesso!",
                 "Registo bem sucedido",
-                JOptionPane.ERROR_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
         return;
     }
 }

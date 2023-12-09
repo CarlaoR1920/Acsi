@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Properties;
 
 public class ConsumerPagamento {
+
     public static void main(String[] args) {
 
         Properties consumerProperties = new Properties();
@@ -48,9 +49,11 @@ public class ConsumerPagamento {
                     String data_compra = pagamento.getString("data");
                     String hora_compra = pagamento.getString("hora_compra");
                     String username = pagamento.getString("username");
+                    int token = pagamento.getInt("tokens");
                     int id_passageiro=0;
                     String nif="";
                     int id_gerado=0;
+                    int tokens = 0;
 
                     try {
                         // Carregar o driver JDBC
@@ -86,6 +89,7 @@ public class ConsumerPagamento {
                                     if (resultSet.next()) {
                                         nif = resultSet.getString("nif");
                                         id_passageiro  = resultSet.getInt("id");
+                                        tokens  = resultSet.getInt("tokens");
 
 
                                     } else {
@@ -93,6 +97,25 @@ public class ConsumerPagamento {
                                     }
                                 }
                             }
+
+                            String sql5 = "INSERT INTO Titulo (id_passageiro, nif, id_pagamento, data_compra, hora_compra) VALUES (?, ?, ?, ?, ?)";
+                            try (PreparedStatement statement5 = connection.prepareStatement(sql5)) {
+                                // Atribuir valores aos parâmetros da consulta
+                                statement5.setInt(1, id_passageiro);
+                                statement5.setString(2, nif);
+                                statement5.setInt(3, id_gerado);
+                                statement5.setString(4, data_compra);
+                                statement5.setString(5, hora_compra);
+                                // Executar a consulta
+                                int linhasAfetadas = statement5.executeUpdate();
+                                if (linhasAfetadas > 0) {
+                                    System.out.println("Inserção bem-sucedida!");
+                                } else {
+                                    System.out.println("Falha na inserção.");
+                                }
+                            }
+
+                            tokens += token;
                             String sql3 = "INSERT INTO Faturas (id_passageiro, nif, id_pagamento, data_compra, hora_compra) VALUES (?, ?, ?, ?, ?)";
                             try (PreparedStatement statement3 = connection.prepareStatement(sql3)) {
                                     // Atribuir valores aos parâmetros da consulta
@@ -108,6 +131,21 @@ public class ConsumerPagamento {
                                     } else {
                                         System.out.println("Falha na inserção.");
                                     }
+                            }
+
+                            String sql4 = "UPDATE Utilizadores SET tokens = ? WHERE id = ?";
+                            try (PreparedStatement statement4 = connection.prepareStatement(sql4)) {
+                                // Atribuir valores aos parâmetros da consulta
+                                statement4.setInt(1, tokens);
+                                statement4.setInt(2, id_passageiro);
+
+                                // Executar a consulta
+                                int linhasAfetadas = statement4.executeUpdate();
+                                if (linhasAfetadas > 0) {
+                                    System.out.println("Inserção bem-sucedida!");
+                                } else {
+                                    System.out.println("Falha na inserção.");
+                                }
                             }
                         }
 

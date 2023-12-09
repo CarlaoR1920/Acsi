@@ -25,6 +25,8 @@ public class Topico {
             String topico5 = "topicoPagamento";
             String topico7="topicoDadosLogin";
             String topico8="topicoResultadoLogin";
+            String topico9="topicoPrecoRota";
+            String topico10="topicoResultPrecoRota";
 
 
             // Número de partições e fator de replicação para o novo tópico
@@ -37,8 +39,10 @@ public class Topico {
             //NewTopic newTopic3 = new NewTopic(topico3, numPartitions, replicationFactor);
             //NewTopic newTopic4 = new NewTopic(topico4, numPartitions, replicationFactor);
             //NewTopic newTopic5 = new NewTopic(topico5, numPartitions, replicationFactor);
-            NewTopic newTopic7 = new NewTopic(topico7, numPartitions, replicationFactor);
-            NewTopic newTopic8 = new NewTopic(topico8, numPartitions, replicationFactor);
+            //NewTopic newTopic7 = new NewTopic(topico7, numPartitions, replicationFactor);
+            //NewTopic newTopic8 = new NewTopic(topico8, numPartitions, replicationFactor);
+            //NewTopic newTopic9 = new NewTopic(topico9, numPartitions, replicationFactor);
+            NewTopic newTopic10 = new NewTopic(topico10, numPartitions, replicationFactor);
             // Criação do tópico
             /*adminClient.createTopics(Collections.singletonList(newTopic1))
                     .all()
@@ -55,10 +59,16 @@ public class Topico {
             /*adminClient.createTopics(Collections.singletonList(newTopic5))
                     .all()
                     .get();*/
-            adminClient.createTopics(Collections.singletonList(newTopic7))
+            /*adminClient.createTopics(Collections.singletonList(newTopic7))
                     .all()
-                    .get();
-            adminClient.createTopics(Collections.singletonList(newTopic8))
+                    .get();*/
+            /*adminClient.createTopics(Collections.singletonList(newTopic8))
+                    .all()
+                    .get();*/
+            /*adminClient.createTopics(Collections.singletonList(newTopic9))
+                    .all()
+                    .get();*/
+            adminClient.createTopics(Collections.singletonList(newTopic10))
                     .all()
                     .get();
 
@@ -67,8 +77,10 @@ public class Topico {
             //System.out.println("Tópico criado com sucesso: " + topico3);
             //System.out.println("Tópico criado com sucesso: " + topico4);
             //System.out.println("Tópico criado com sucesso: " + topico5);
-            System.out.println("Tópico criado com sucesso: " + topico7);
-            System.out.println("Tópico criado com sucesso: " + topico8);
+            //System.out.println("Tópico criado com sucesso: " + topico7);
+            //System.out.println("Tópico criado com sucesso: " + topico8);
+            //System.out.println("Tópico criado com sucesso: " + topico9);
+            System.out.println("Tópico criado com sucesso: " + topico10);
         } catch (InterruptedException | ExecutionException e) {
             System.err.println("Erro ao criar o tópico: " + e.getMessage());
         }

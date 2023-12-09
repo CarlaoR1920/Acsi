@@ -16,6 +16,7 @@ public class TipoDePagamento extends JFrame {
     private String origem;
     private String destino;
     private String tipo;
+    private float preco;
     private JComboBox cbMeioPagamento;
     private JLabel lbValor;
     private JButton confirmarButton;
@@ -62,19 +63,20 @@ public class TipoDePagamento extends JFrame {
         return referencia.toString();
     }
 
-    public TipoDePagamento(String origem, String destino, String tipo, String username) {
+    public TipoDePagamento(String origem, String destino, String tipo, String username, float preco) {
 
         this.username = username;
         this.origem = origem;
         this.destino = destino;
         this.tipo = tipo;
+        this.preco = preco;
         setContentPane(panelTipoDePagamento);
         setTitle("TubMobile");
         setSize(650, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        lbValor.setText("50.49");
+        lbValor.setText(Float.toString(preco));
         String s1[] = {"Multibanco", "MBWay", "PayPal"};
         cbMeioPagamento.setModel(new javax.swing.DefaultComboBoxModel(s1));
 
@@ -106,9 +108,10 @@ public class TipoDePagamento extends JFrame {
                     data = CurrentDateExample();
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
-                    jsonString = pay.toString();
                     prodValCompra.prod(valor);
                     tokens = crt.coonsumerResultadoTokens();
+                    pay.put("tokens", tokens);
+                    jsonString = pay.toString();
                     prodPagamento.producerPagamento(jsonString);
                     JOptionPane.showMessageDialog(panelTipoDePagamento,
                             "Você Recebeu:"+ tokens + " tokens",
@@ -123,9 +126,10 @@ public class TipoDePagamento extends JFrame {
                     data = CurrentDateExample();
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
-                    jsonString = pay.toString();
                     prodValCompra.prod(valor);
                     tokens = crt.coonsumerResultadoTokens();
+                    pay.put("tokens", tokens);
+                    jsonString = pay.toString();
                     prodPagamento.producerPagamento(jsonString);
                     JOptionPane.showMessageDialog(panelTipoDePagamento,
                             "Você Recebeu:"+ tokens + " tokens",
@@ -140,9 +144,10 @@ public class TipoDePagamento extends JFrame {
                     data = CurrentDateExample();
                     pay.put("hora_compra", hora_atual);
                     pay.put("data", data);
-                    jsonString = pay.toString();
                     prodValCompra.prod(valor);
                     tokens = crt.coonsumerResultadoTokens();
+                    pay.put("tokens", tokens);
+                    jsonString = pay.toString();
                     prodPagamento.producerPagamento(jsonString);
                     JOptionPane.showMessageDialog(panelTipoDePagamento,
                             "Você Recebeu:"+ tokens + " tokens",
