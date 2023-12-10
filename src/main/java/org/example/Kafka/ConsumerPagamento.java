@@ -99,7 +99,7 @@ public class ConsumerPagamento {
                                 }
                             }
 
-                            String sql5 = "INSERT INTO Titulo (id_passageiro, nif, id_pagamento, data_compra, hora_compra) VALUES (?, ?, ?, ?, ?)";
+                           /* String sql5 = "INSERT INTO Titulo (id_passageiro, nif, id_pagamento, data_compra, hora_compra) VALUES (?, ?, ?, ?, ?)";
                             try (PreparedStatement statement5 = connection.prepareStatement(sql5)) {
                                 // Atribuir valores aos parâmetros da consulta
                                 statement5.setInt(1, id_passageiro);
@@ -114,7 +114,7 @@ public class ConsumerPagamento {
                                 } else {
                                     System.out.println("Falha na inserção.");
                                 }
-                            }
+                            }*/
 
                             tokens += token;
                             String sql3 = "INSERT INTO Faturas (id_passageiro, nif, id_pagamento, data_compra, hora_compra) VALUES (?, ?, ?, ?, ?)";

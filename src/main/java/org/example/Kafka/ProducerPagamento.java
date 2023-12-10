@@ -8,7 +8,7 @@ import java.util.Properties;
 
 
 
-    public class ProducerPagamento {
+public class ProducerPagamento {
         public ProducerPagamento(){}
         public void producerPagamento(String dados) {
 
@@ -33,5 +33,5 @@ import java.util.Properties;
             // Fechar o produtor ao finalizar
             producer.close();
         }
-    }
+}
 

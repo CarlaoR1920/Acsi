@@ -30,7 +30,7 @@ public class TarefaAPI {
 
             String topicName = "topicoValorCompra";
             kafkaConsumer.subscribe(Collections.singletonList(topicName));
-            while (true) {;
+            while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(100));
                 for (ConsumerRecord<String, String> record : records) {
                     return Double.valueOf(record.value());

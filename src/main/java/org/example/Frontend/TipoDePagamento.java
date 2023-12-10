@@ -1,8 +1,10 @@
 package org.example.Frontend;
-import org.apache.kafka.clients.producer.Producer;
+
+
+import org.example.Kafka.ProducerPagamento;
 import org.example.Kafka.ProducerValorCompra;
-import org.json.JSONObject;;
-import org.example.Kafka.*;
+import org.json.JSONObject;
+import org.example.Kafka.ConsumerResultadoTokens;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -157,6 +159,8 @@ public class TipoDePagamento extends JFrame {
                             "Compra Bem-sucedida! ",
                             JOptionPane.INFORMATION_MESSAGE);
                 }
+                EscolherRotas er = new EscolherRotas(username);
+                dispose();
             }
 
         });
